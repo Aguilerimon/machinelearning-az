@@ -22,3 +22,12 @@ x = dataset.iloc[:,:-1].values
 
 #Asignamos a la variable y todas las filas de la ultima columna como variable dependiente
 y = dataset.iloc[:, 3].values
+
+#Tratamiento de los NAs o valores faltantes
+from sklearn.preprocessing import Imputer
+
+#Especificamos todos los terminos necesarios para el tratamiento de los NAs
+imputer = Imputer(missing_values = "NaN", strategy = "mean", axis = 0)
+
+imputer = imputer.fit(x[:, 1:3])
+x[:, 1:3] = imputer.transform(x[:, 1:3])
